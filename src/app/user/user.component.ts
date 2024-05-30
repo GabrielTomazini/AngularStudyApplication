@@ -11,7 +11,7 @@ export class UserComponent {
   count = 0;
   @Input() occupation = '';
   @Output() incrementCountEvent = new EventEmitter<number>();
-
+  @Output() addItemEvent = new EventEmitter<string>();
   onClick() {
     this.count++;
     this.incrementCountEvent.emit(this.count);
@@ -19,5 +19,8 @@ export class UserComponent {
   onClickMinus1() {
     this.count--;
     this.incrementCountEvent.emit(this.count);
+  }
+  addItem() {
+    this.addItemEvent.emit('🐢');
   }
 }
