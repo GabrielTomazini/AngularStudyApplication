@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
 })
@@ -11,7 +12,6 @@ export class UserComponent {
   count = 0;
   @Input() occupation = '';
   @Output() incrementCountEvent = new EventEmitter<number>();
-  @Output() addItemEvent = new EventEmitter<string>();
   onClick() {
     this.count++;
     this.incrementCountEvent.emit(this.count);
@@ -19,8 +19,5 @@ export class UserComponent {
   onClickMinus1() {
     this.count--;
     this.incrementCountEvent.emit(this.count);
-  }
-  addItem() {
-    this.addItemEvent.emit('🐢');
   }
 }

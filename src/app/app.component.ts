@@ -1,17 +1,39 @@
-import { Component, Input } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { MyComponentComponent } from './my-component/my-component.component';
 import { UserComponent } from './user/user.component';
+import { NgOptimizedImage } from '@angular/common';
+import {
+  ReactiveFormsModule,
+  FormsModule,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MyComponentComponent, UserComponent],
+  imports: [
+    RouterLink,
+    RouterOutlet,
+    MyComponentComponent,
+    UserComponent,
+    NgOptimizedImage,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './app.component.html',
   //template: `{{ 1 + 1 }}`
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  @Output() addItemEvent = new EventEmitter<string>();
+  profileForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+  });
+  favoriteFramework = '';
   message = 'AQUI';
   title = 'AngularProject';
   city = 'Xique Xique - BH';
@@ -26,8 +48,16 @@ export class AppComponent {
     console.log('Hello, there 👋');
     alert('Tu clicou ali!');
   }
-
   onMouseOver() {
     this.message = 'Way to go 🚀';
+  }
+  addItem() {
+    this.addItemEvent.emit('🐢');
+  }
+  showFramework() {
+    alert(this.favoriteFramework);
+  }
+  handleSubmit() {
+    alert(this.profileForm.value.name + ' | ' + this.profileForm.value.email);
   }
 }
