@@ -3,6 +3,9 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { MyComponentComponent } from './my-component/my-component.component';
 import { UserComponent } from './user/user.component';
 import { NgOptimizedImage } from '@angular/common';
+import { StepperModule } from 'primeng/stepper';
+import { InputOtpModule } from 'primeng/inputotp';
+import { ButtonModule } from 'primeng/button';
 import {
   ReactiveFormsModule,
   FormsModule,
@@ -15,6 +18,9 @@ import {
   selector: 'app-root',
   standalone: true,
   imports: [
+    InputOtpModule,
+    StepperModule,
+    ButtonModule,
     RouterLink,
     RouterOutlet,
     MyComponentComponent,
@@ -38,6 +44,7 @@ export class AppComponent {
   title = 'AngularProject';
   city = 'Xique Xique - BH';
   isLoggedIn = true;
+  public value: any;
   operatingSystems = [
     { id: 'win', name: 'Windows' },
     { id: 'osx', name: 'MacOS' },

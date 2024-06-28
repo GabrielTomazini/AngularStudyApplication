@@ -6,13 +6,90 @@
   </nav>
  <router-outlet/>
 -->
+<div class="card flex justify-content-center">
+    <div class="flex flex-column align-items-center">
+        <div class="font-bold text-xl mb-2">Authenticate Your Account</div>
+        <p class="text-color-secondary block mb-5">Please enter the code sent to your phone.</p>
+        <p-inputOtp [(ngModel)]="value" [length]="6" style="gap: 0">
+            <ng-template pTemplate="input" let-token let-events="events" let-index="index">
+                <input 
+                    pInputText 
+                    type="text" 
+                    [maxLength]="1" 
+                    (input)="events.input($event)" 
+                    (keydown)="events.keydown($event)" 
+                    [attr.value]="token" 
+                    class="custom-otp-input" />
+                <div *ngIf="index === 3" class="px-3">
+                    <i class="pi pi-minus"></i>
+                </div>
+            </ng-template>
+        </p-inputOtp>
+        <div class="flex justify-content-between mt-5 align-self-stretch">
+            <p-button label="Resend Code" [link]="true" class="p-0"/>
+            <p-button label="Submit Code"/>
+        </div>
+    </div>
+</div>
 
-<nav>
-    <a href="/">Home</a>
-    |
-    <a href="/user">User</a>
-</nav>
-
+<div class="card flex justify-content-center">
+    <p-inputOtp [(ngModel)]="value" [length]="6"/>
+</div>
+<div class="card flex justify-content-center">
+    <p-stepper>
+        <p-stepperPanel header="Header I">
+            <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+                <div class="flex flex-column h-12rem">
+                    <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                        Content I
+                    </div>
+                </div>
+                <div class="flex pt-4 justify-content-end">
+                    <p-button 
+                        label="Next" 
+                        icon="pi pi-arrow-right" 
+                        iconPos="right" 
+                        (onClick)="nextCallback.emit()" />
+                </div>
+            </ng-template>
+        </p-stepperPanel>
+        <p-stepperPanel header="Header II">
+            <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+                <div class="flex flex-column h-12rem">
+                    <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                        Content II
+                    </div>
+                </div>
+                <div class="flex pt-4 justify-content-between">
+                    <p-button 
+                        label="Back" 
+                        icon="pi pi-arrow-left" 
+                        (onClick)="prevCallback.emit()" />
+                    <p-button 
+                        label="Next" 
+                        icon="pi pi-arrow-right" 
+                        iconPos="right" 
+                        (onClick)="nextCallback.emit()" />
+                </div>
+            </ng-template>
+        </p-stepperPanel>
+        <p-stepperPanel header="Header III">
+            <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
+                <div class="flex flex-column h-12rem">
+                    <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                        Content III
+                    </div>
+                </div>
+                <div class="flex pt-4 justify-content-start">
+                    <p-button 
+                        label="Back" 
+                        icon="pi pi-arrow-left" 
+                        (onClick)="prevCallback.emit()" />
+                </div>
+            </ng-template>
+        </p-stepperPanel>
+    </p-stepper>
+</div>
 <app-my-component></app-my-component>
 {{title}}
 <br>
@@ -29,7 +106,6 @@
 @for (os of operatingSystems; track os.id) {
 {{ os.name }}
 }
-
 <div [contentEditable]="isEditable"></div>
 
 <button (click)="greet()">Clique Aqui</button>
