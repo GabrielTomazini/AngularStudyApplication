@@ -18,7 +18,7 @@ import {
   styleUrl: './form-control.component.scss'
 })
 export class FormControlComponent {
-  
+
   private formBuilder = inject(FormBuilder);
   profileForm = this.formBuilder.group({
     firstName: [''],
@@ -31,7 +31,6 @@ export class FormControlComponent {
     }),
 
   });
-
 
   updateProfile() {
     this.profileForm.patchValue({
