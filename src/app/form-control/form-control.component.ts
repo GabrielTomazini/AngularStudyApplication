@@ -25,6 +25,7 @@ export class FormControlComponent {
       city: [''],
       state: [''],
       zip: [''],
+      asdasads: [''],
     }),
     aliases: this.formBuilder.array([this.formBuilder.control('')]),
   });
